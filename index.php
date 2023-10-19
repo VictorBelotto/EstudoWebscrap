@@ -8,26 +8,22 @@ $dom->loadHTML($html);
 
 $xpath = new DOMXPath($dom);
 
-$getH4 = $dom->getElementsByTagName('h4');
+/*Pegando o titulo do post  */
+  $getTitlePost = $xpath->query("//h4[@class='my-xs paper-title']");
 
-$h4 = '';
+  $titleList = '';
 
-foreach ($getH4 as $listaDeH4) {
-  $textContent = trim($listaDeH4->textContent);
-
-  if (!empty($textContent)) {
-    $h4 .= "Titulo: " . $listaDeH4->textContent . "<br> <br>";
+  foreach($getTitlePost as $title){
+    $textContent = trim($title->textContent);
+    $titleList .= "Titulo: " .  $textContent . "<br><br>";
   }
-};
-/*Pegando elementos em  */
-$class = "f-primary my-none paper-title";
 
-$idPosts = $xpath->query("//*[@class='$class']");
+/*Pegando o ID do post  */
+  $getIdPost = $xpath->query("//div[@class='volume-info']");
 
-$idPost = '';
+  $listIdPost = '';
 
-foreach ($idPosts as $id) {
-  $idPost .= "Post: " . $id->textContent . "<br>";
-};
+  foreach ($getIdPost as $id) {
+    $listIdPost .= "ID do post: " . $id->textContent . "<br>";
+  };
 
-echo $idPost;
