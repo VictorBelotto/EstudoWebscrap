@@ -8,22 +8,34 @@ $dom->loadHTML($html);
 
 $xpath = new DOMXPath($dom);
 
-/*Pegando o titulo do post  */
-  $getTitlePost = $xpath->query("//h4[@class='my-xs paper-title']");
 
-  $titleList = '';
+/* Capturando o ID do post  */
+$getIdPost = $xpath->query("//div[@class='volume-info']");
 
-  foreach($getTitlePost as $title){
-    $textContent = trim($title->textContent);
-    $titleList .= "Titulo: " .  $textContent . "<br><br>";
-  }
+$getTitlePost = $xpath->query("//h4[@class='my-xs paper-title']");
 
-/*Pegando o ID do post  */
-  $getIdPost = $xpath->query("//div[@class='volume-info']");
+$getType = $xpath->query("//div[@class='tags mr-sm']");
 
-  $listIdPost = '';
+$getAuthor = $xpath->query("//div[@class='authors']");
 
-  foreach ($getIdPost as $id) {
-    $listIdPost .= "ID do post: " . $id->textContent . "<br>";
-  };
+/* Construtor para separar os autores */
+
+ 
+$autores =  $getAuthor->item(0);
+
+/* $arrayDeAutores = explode(";", $autores); */
+
+/* print_r($arrayDeAutores); */
+
+/* $getInstituicao = $getAuthor->getAttribute('title'); */
+
+$cardPosts = $xpath->query("//a*[@class='paper-card p-lg bd-gradient-left']");
+
+$cardPost = '';
+
+foreach ($cardPosts as $cardPost) {
+  
+  echo $cardPost->nodeValue . "<br><br>";
+}
+
 
