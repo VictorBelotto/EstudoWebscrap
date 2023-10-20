@@ -11,19 +11,33 @@ $xpath = new DOMXPath($dom);
 
 
 
-$cardPosts = $xpath->query("//a[@class='paper-card p-lg bd-gradient-left']")->item(0);
+$cardPosts = $xpath->query("//a[@class='paper-card p-lg bd-gradient-left']");
 
-$postId = $xpath->query(".//div[@class='volume-info']", $cardPosts)->item(0);
+/* $postId = $xpath->query(".//div[@class='volume-info']", $cardPost)->item(0);
 
-$postTitle = $xpath->query(".//h4", $cardPosts)->item(0);
+$postTitle = $xpath->query(".//h4", $cardPost)->item(0);
 
-$postType = $xpath->query(".//div[@class='tags mr-sm']", $cardPosts)->item(0);
+$postType = $xpath->query(".//div[@class='tags mr-sm']", $cardPost)->item(0);
 
-$postAuthors = $xpath->query(".//span", $cardPosts);
+$postAuthors = $xpath->query(".//span", $cardPost);
 
-$authorsInstituitions = $xpath->query(".//div[@class='authors']/span/@title", $cardPosts);
+$authorsInstituitions = $xpath->query(".//div[@class='authors']/span/@title", $cardPost);
+ */
 
 
+foreach ($cardPosts as $cardpost) {
+  $postId = $xpath->query(".//div[@class='volume-info']", $cardpost)->item(0);
+
+  $postTitle = $xpath->query(".//h4", $cardpost)->item(0);
+
+  $postType = $xpath->query(".//div[@class='tags mr-sm']", $cardpost)->item(0);
+
+  $postAuthors = $xpath->query(".//span", $cardpost);
+
+  $authorsInstituitions = $xpath->query(".//div[@class='authors']/span/@title", $cardpost);
+
+  rowPost($postId, $postTitle, $postType, $postAuthors, $authorsInstituitions);
+}
 
 
 function rowPost($id, $title, $type, $authors, $instituitions)
@@ -45,5 +59,3 @@ function rowPost($id, $title, $type, $authors, $instituitions)
     "<b>Instituição do Post:</b>  $arrayInstituition " . '<br>' .
     '___________________________________________________________________' . '<br>';
 }
-
-rowPost($postId, $postTitle, $postType, $postAuthors, $authorsInstituitions);
