@@ -12,9 +12,12 @@ function buscaPosts(){
   
   $cardPosts = $xpath->query("//a[@class='paper-card p-lg bd-gradient-left']");
 
+  $postQuantity = count($cardPosts);
+   print_r($postQuantity);
 
-   
   $arrayClass = [];
+
+
 
   foreach ($cardPosts as $cardpost) {
     $postId = $xpath->query(".//div[@class='volume-info']", $cardpost)->item(0);
@@ -43,3 +46,16 @@ function arrayOrdenadoAutorEInstituicao($authors, $institutions){
   return $authorsAndInstitutionArray;
 };
 
+function buscaPostId() {
+  $arrayId = func_get_args();
+  $posts = buscaPosts();
+  print_r( $arrayId);
+  
+  foreach ($posts as $post) {
+    foreach ($arrayId as $id) {
+      if ($post->postId->textContent === $id) {
+        print_r($post);
+      }
+    }
+  }
+}
