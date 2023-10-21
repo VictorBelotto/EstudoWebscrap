@@ -13,18 +13,6 @@ $xpath = new DOMXPath($dom);
 
 $cardPosts = $xpath->query("//a[@class='paper-card p-lg bd-gradient-left']");
 
-/* $postId = $xpath->query(".//div[@class='volume-info']", $cardPost)->item(0);
-
-$postTitle = $xpath->query(".//h4", $cardPost)->item(0);
-
-$postType = $xpath->query(".//div[@class='tags mr-sm']", $cardPost)->item(0);
-
-$postAuthors = $xpath->query(".//span", $cardPost);
-
-$authorsInstituitions = $xpath->query(".//div[@class='authors']/span/@title", $cardPost);
- */
-
-
 foreach ($cardPosts as $cardpost) {
   $postId = $xpath->query(".//div[@class='volume-info']", $cardpost)->item(0);
 
