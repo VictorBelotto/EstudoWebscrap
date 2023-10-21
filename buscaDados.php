@@ -1,4 +1,5 @@
 <?php
+require './classDados.php';
 
 libxml_use_internal_errors(true);
 
@@ -13,24 +14,23 @@ function buscaPosts(){
   
   $cardPosts = $xpath->query("//a[@class='paper-card p-lg bd-gradient-left']");
 
+
+   
+  $arrayClass = [];
+
   foreach ($cardPosts as $cardpost) {
     $postId = $xpath->query(".//div[@class='volume-info']", $cardpost)->item(0);
     $postTitle = $xpath->query(".//h4", $cardpost)->item(0);
     $postType = $xpath->query(".//div[@class='tags mr-sm']", $cardpost)->item(0);
     $postAuthors = $xpath->query(".//span", $cardpost);
     $authorsInstituitions = $xpath->query(".//div[@class='authors']/span/@title", $cardpost);
-    $recebeArray = arrayOrdenadoAutorEInstituicao($postAuthors, $authorsInstituitions);
     
-    $string = '';
-    foreach($recebeArray as $element){
-        $string .= $element . '  ||'; 
-    };
-    print_r($string);
+    $post = new dadosDoPost( $postId,$postTitle,$postType,$postAuthors,$authorsInstituitions);
+    $arrayClass[] = $post;
   }    
-  
+  return $arrayClass;
 
 }
-
 
 function arrayOrdenadoAutorEInstituicao($authors, $institutions){
   $authorsAndInstitutionArray = [];
@@ -45,4 +45,4 @@ function arrayOrdenadoAutorEInstituicao($authors, $institutions){
   return $authorsAndInstitutionArray;
 };
 
-buscaPosts();
+print_r(buscaPosts());
