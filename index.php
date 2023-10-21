@@ -1,6 +1,7 @@
 <?php
 
 
+
 $html = file_get_contents('origin.html');
 libxml_use_internal_errors(true);
 
@@ -8,7 +9,6 @@ $dom = new DOMDocument();
 $dom->loadHTML($html);
 
 $xpath = new DOMXPath($dom);
-
 
 
 $cardPosts = $xpath->query("//a[@class='paper-card p-lg bd-gradient-left']");
@@ -47,3 +47,5 @@ function rowPost($id, $title, $type, $authors, $instituitions)
     "<b>Instituição do Post:</b>  $arrayInstituition " . '<br>' .
     '___________________________________________________________________' . '<br>';
 }
+
+
