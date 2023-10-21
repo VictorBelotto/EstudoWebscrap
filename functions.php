@@ -1,8 +1,6 @@
 <?php
 require './classDados.php';
 
-libxml_use_internal_errors(true);
-
 function buscaPosts(){
   $html = file_get_contents('origin.html');
 
@@ -45,4 +43,3 @@ function arrayOrdenadoAutorEInstituicao($authors, $institutions){
   return $authorsAndInstitutionArray;
 };
 
-print_r(buscaPosts());
